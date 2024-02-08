@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ContactGroup extends Model
+class MessageType extends Model
 {
     use HasFactory;
-    protected $table = "contact_groups";
+    protected $table = "message_types";
 
     protected $fillable = [
-	    'name','contact_ids','contact_count','user_id','soft_delete'
+	    'name'
 	];
 }

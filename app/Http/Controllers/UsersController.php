@@ -9,6 +9,7 @@ use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -16,6 +17,8 @@ class UsersController extends Controller
 
     public function login(LoginUserRequest $request)
     {
+
+        Log::info($request);
         $request->validated($request->all());
         $credentials = [
             'email' => $request['email'],
