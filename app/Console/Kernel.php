@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\Commands\Schedule as CommandsSchedule;
+use App\Console\Commands\ScheduleReoccurring;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,8 +15,15 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('app:schedule')->everyMinute();
+        $schedule->command('app:schedule-reoccurring')->everyMinute();
     }
 
+    protected $commands = [
+        CommandsSchedule::class,
+        ScheduleReoccurring::class,
+    ];
+    
     /**
      * Register the commands for the application.
      */

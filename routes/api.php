@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\FirebasePushController;
+use App\Http\Controllers\HelperController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UsersController;
@@ -34,7 +35,10 @@ Route::group(['middleware' => 'auth:sanctum'], function()
     Route::post('/getGroupDetails', [ContactsController::class, 'getGroupDetails']);
     Route::get('/getMessages', [ScheduleController::class, 'getMessages']);
     Route::get('/getMessageTypes', [ScheduleController::class, 'getMessageTypes']);
+    Route::get('/schedule/end', [ScheduleController::class, 'endSchedule']);
     Route::post('/deleteGroup', [ContactsController::class, 'deleteGroup']);
+    Route::post('/schedules/onetime', [HelperController::class, 'triggerScheduleForOneTime']);
+    Route::post('/schedules/reoccurring', [HelperController::class, 'triggerScheduleForReoccurring']);
     Route::post('setToken', [FirebasePushController::class, 'setToken'])->name('firebase.token'); 
     Route::post('send/notification',[FirebasePushController::class,'notification'])->name('firebase.send');
 });

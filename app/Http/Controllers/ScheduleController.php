@@ -273,4 +273,27 @@ class ScheduleController extends Controller
 
         }
     }
+
+    public function endSchedule(Request $request){
+        $userId = Auth::id();
+        $usersScheduleCheck = Schedule::Where('user_id', $userId)->where('id', $request->schedule_id);
+        if($usersScheduleCheck->exists()){
+            // $usersSchedules = $usersScheduleCheck->first();
+            $usersScheduleCheck->update([
+                'status' => 2,
+                'ended_at' => Carbon::now(),
+            ]);
+
+
+            return response()->json([
+                'status' => 200,
+                'message' => 'Schedule Successfully Ended'
+            ]);
+        }else{
+            return response()->json([
+                'status' => 300,
+                'message' => 'Failed to End Schedule'
+            ]);
+        }
+    }
 }
